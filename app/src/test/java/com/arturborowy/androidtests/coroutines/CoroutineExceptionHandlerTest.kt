@@ -21,10 +21,6 @@ import org.junit.Test
 
 class CoroutineExceptionHandlerTest {
 
-    private interface ThrowableHandlingDelegate {
-        fun handle(throwable: Throwable)
-    }
-
     private val throwableHandlingDelegate = mockk<ThrowableHandlingDelegate>()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
