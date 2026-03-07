@@ -1,5 +1,6 @@
 package com.arturborowy.androidtests.coroutines
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -35,5 +36,27 @@ class CoroutineScopeTest {
         }
 
         assertFalse(hasSecondChildSucceeded)
+    }
+
+    @Test
+    fun `CoroutineScope's direct child coroutine is not cancelled when another direct child throws CancellationException`() {
+        val cancellationException = CancellationException()
+
+        var hasSecondChildSucceeded = false
+
+        runBlocking {
+            val throwingChild = coroutineScope.launch {
+                throw cancellationException
+            }
+
+            val successChild = coroutineScope.launch {
+                delay(100)
+                hasSecondChildSucceeded = true
+            }
+
+            joinAll(throwingChild, successChild)
+        }
+
+        assert(hasSecondChildSucceeded)
     }
 }

@@ -142,4 +142,17 @@ class CoroutineExceptionHandlerTest {
         verify(inverse = true) { throwableHandlingDelegate.handle(exceptionToThrow) }
         verify { tryCatchThrowableHandlingDelegate.handle(exceptionToThrow) }
     }
+
+    @Test
+    fun `CoroutineExceptionHandler is NOT called when CancellationException is thrown from root coroutine launch`() {
+        val cancellationException = CancellationException()
+
+        val job = scope.launch {
+            throw cancellationException
+        }
+
+        runBlocking { job.join() }
+
+        verify(inverse = true) { throwableHandlingDelegate.handle(cancellationException) }
+    }
 }
