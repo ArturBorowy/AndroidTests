@@ -18,10 +18,6 @@ class SupervisorJobTest {
 
     private val exceptionToThrow = RuntimeException()
 
-    @Before
-    fun setUp() {
-    }
-
     @Test
     fun `SupervisorJob's direct child coroutine is not cancelled when another direct child fails`() {
         var hasSecondChildSucceeded = false
