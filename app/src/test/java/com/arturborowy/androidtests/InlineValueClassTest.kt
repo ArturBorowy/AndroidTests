@@ -1,8 +1,6 @@
-package com.arturborowy.androidtests.coroutines
+package com.arturborowy.androidtests
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.junit.Assert
 import org.junit.Test
 
 class InlineValueClassTest {
@@ -16,8 +14,8 @@ class InlineValueClassTest {
 
     @Test
     fun `data's and inline value class's toString() returns string created in the same pattern`() {
-        assertEquals("PasswordData(value=x)", PasswordData("x").toString())
-        assertEquals("PasswordInline(value=x)", PasswordInline("x").toString())
+        Assert.assertEquals("PasswordData(value=x)", PasswordData("x").toString())
+        Assert.assertEquals("PasswordInline(value=x)", PasswordInline("x").toString())
     }
 
     @Test
@@ -27,27 +25,27 @@ class InlineValueClassTest {
 
     @Test
     fun `equals returns false when different value is passed to constructors`() {
-        assertFalse(PasswordInline("x") == PasswordInline("y"))
+        Assert.assertFalse(PasswordInline("x") == PasswordInline("y"))
     }
 
     @Test
     fun `hashCode equals underlying value hashCode`() {
-        assertEquals("x".hashCode(), PasswordInline("x").hashCode())
+        Assert.assertEquals("x".hashCode(), PasswordInline("x").hashCode())
     }
 
     @Test
     fun `boxing via interface - referential inequality`() {
         val a: Wrapper = PasswordInline("x")
         val b: Wrapper = PasswordInline("x")
-        assertFalse(a === b)
-        assertTrue(a == b)
+        Assert.assertFalse(a === b)
+        Assert.assertTrue(a == b)
     }
 
     @Test
     fun `boxing via nullable - referential inequality`() {
         val a: Any = PasswordInline("x")
         val b: Any = PasswordInline("x")
-        assertFalse(a === b)
-        assertTrue(a == b)
+        Assert.assertFalse(a === b)
+        Assert.assertTrue(a == b)
     }
 }
