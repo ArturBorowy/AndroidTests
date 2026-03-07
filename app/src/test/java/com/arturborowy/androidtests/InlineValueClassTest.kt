@@ -1,6 +1,9 @@
 package com.arturborowy.androidtests
 
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertFalse
 import org.junit.Assert
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class InlineValueClassTest {
@@ -14,8 +17,8 @@ class InlineValueClassTest {
 
     @Test
     fun `data's and inline value class's toString() returns string created in the same pattern`() {
-        Assert.assertEquals("PasswordData(value=x)", PasswordData("x").toString())
-        Assert.assertEquals("PasswordInline(value=x)", PasswordInline("x").toString())
+        assertEquals("PasswordData(value=x)", PasswordData("x").toString())
+        assertEquals("PasswordInline(value=x)", PasswordInline("x").toString())
     }
 
     @Test
@@ -25,27 +28,66 @@ class InlineValueClassTest {
 
     @Test
     fun `equals returns false when different value is passed to constructors`() {
-        Assert.assertFalse(PasswordInline("x") == PasswordInline("y"))
+        assertFalse(PasswordInline("x") == PasswordInline("y"))
     }
 
     @Test
     fun `hashCode equals underlying value hashCode`() {
-        Assert.assertEquals("x".hashCode(), PasswordInline("x").hashCode())
+        assertEquals("x".hashCode(), PasswordInline("x").hashCode())
     }
 
     @Test
     fun `boxing via interface - referential inequality`() {
         val a: Wrapper = PasswordInline("x")
         val b: Wrapper = PasswordInline("x")
-        Assert.assertFalse(a === b)
-        Assert.assertTrue(a == b)
+        assertFalse(a === b)
+        assert(a == b)
+    }
+
+    @Test
+    fun `boxing via Any - referential inequality`() {
+        val list1 = listOf(PasswordInline("x"))
+        val list2 = listOf(PasswordInline("x"))
+        val a: Any = list1[0]
+        val b: Any = list2[0]
+        assertFalse(a === b)
+        assert(a == b)
     }
 
     @Test
     fun `boxing via nullable - referential inequality`() {
-        val a: Any = PasswordInline("x")
-        val b: Any = PasswordInline("x")
-        Assert.assertFalse(a === b)
-        Assert.assertTrue(a == b)
+        val a: Any? = PasswordInline("x")
+        val b: Any? = PasswordInline("x")
+        assertFalse(a === b)
+        assert(a == b)
+    }
+
+    @Test
+    fun `underlying value is accessible`() {
+        assertEquals("x", PasswordInline("x").value)
+    }
+
+    @JvmInline
+    private value class NonEmptyPassword(val value: String) {
+        init {
+            require(value.isNotEmpty()) { "Value must not be empty" }
+        }
+    }
+
+    @Test
+    fun `init block throws on invalid value`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            NonEmptyPassword("")
+        }
+    }
+
+    @JvmInline
+    private value class Email(val value: String) {
+        fun domain(): String = value.substringAfter("@")
+    }
+
+    @Test
+    fun `member function operates on underlying value`() {
+        assertEquals("example.com", Email("user@example.com").domain())
     }
 }
