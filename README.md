@@ -10,7 +10,9 @@ A Kotlin/Android project used as a reference and learning resource for unit test
 | `SupervisorJobTest` | `SupervisorJob` isolation: direct children are isolated from each other, grandchildren are not |
 | `SupervisorScopeTest` | `supervisorScope` acting as a child root scope |
 | `CoroutineExceptionHandlerTest` | `CoroutineExceptionHandler` behavior across 9 cases: `launch` vs `async`, caught exceptions, `CancellationException`, child vs root coroutine |
-| `InlineValueClassTest` | Kotlin inline value class behavior: `toString`, `equals`, `hashCode`, boxing via interface and nullable |
+| `InlineValueClassTest` | Kotlin inline value class behavior: `toString`, `equals`, `hashCode`, boxing via interface and nullable, `init` blocks, member functions |
+| `OperatorTest` | Kotlin operator overloading: `plus`, `minus`, `times`, `div`, `unaryMinus`, `unaryPlus`, `rem`, `inc`, `dec`, `get`, `set`, `contains`, `compareTo`, `invoke` |
+| `InfixTest` | Kotlin infix functions: built-in `to`, `and`, `or`; custom `travelTo` infix function |
 
 ## Tech Stack
 

@@ -1,8 +1,7 @@
-package com.arturborowy.androidtests
+package com.arturborowy.androidtests.keywords
 
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
-import org.junit.Assert
 import org.junit.Assert.assertThrows
 import org.junit.Test
 
