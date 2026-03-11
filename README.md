@@ -13,6 +13,8 @@ A Kotlin/Android project used as a reference and learning resource for unit test
 | `InlineValueClassTest` | Kotlin inline value class behavior: `toString`, `equals`, `hashCode`, boxing via interface and nullable, `init` blocks, member functions |
 | `OperatorTest` | Kotlin operator overloading: `plus`, `minus`, `times`, `div`, `unaryMinus`, `unaryPlus`, `rem`, `inc`, `dec`, `get`, `set`, `contains`, `compareTo`, `invoke` |
 | `InfixTest` | Kotlin infix functions: built-in `to`, `and`, `or`; custom `travelTo` infix function |
+| `ListTest` | Kotlin `List` behavior: `listOf` backing objects (`EmptyList`, `singletonList`), insert time complexity O(n) |
+| `MapTest` | Kotlin `Map` behavior: `mapOf` backing objects (`EmptyMap`, `singletonMap`), insert time complexity O(1) |
 
 ## Tech Stack
 
