@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AndroidTests">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".AnimationExamplesActivity"
             android:exported="true"
             android:theme="@style/Theme.AndroidTests">
 
