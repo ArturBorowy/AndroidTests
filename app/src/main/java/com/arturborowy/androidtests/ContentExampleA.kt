@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun ContentExample() {
+fun ContentExampleA() {
     Column {
         Text(
-            "Header",
+            "ContentExampleA",
             Modifier
                 .background(Color.Cyan, RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
                 .fillMaxWidth()
